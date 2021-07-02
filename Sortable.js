@@ -1640,9 +1640,12 @@
     evt) {
       if (tapEvt) {
         var options = this.options,
+            axis = options.fallbackAxis,
             fallbackTolerance = options.fallbackTolerance,
             fallbackOffset = options.fallbackOffset,
             touch = evt.touches ? evt.touches[0] : evt,
+            dx = axis === 'y' ? 0 : (touch.clientX - tapEvt.clientX) + fallbackOffset.x,
+					  dy = axis === 'x' ? 0 : (touch.clientY - tapEvt.clientY) + fallbackOffset.y,
             ghostMatrix = ghostEl && matrix(ghostEl, true),
             scaleX = ghostEl && ghostMatrix && ghostMatrix.a,
             scaleY = ghostEl && ghostMatrix && ghostMatrix.d,
